@@ -1,0 +1,13 @@
+name: MedievalJob
+version: ${project.version}
+main: me.medievaljob.MedievalJob
+authors: [Smarkatch]
+description: Job system for minecraft Spigot server
+commands:
+  getconfig:
+    description: Get config data
+  setconfig:
+    description: Set config data
+  jobs:
+    description: Jobs management
+    usage: /jobs status, /jobs join <jobName>

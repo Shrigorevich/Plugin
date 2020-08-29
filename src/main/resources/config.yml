@@ -1,0 +1,24 @@
+
+MongoURI: "mongodb+srv://shrigorevich:456385@cluster0.kjaby.azure.mongodb.net/jeroniya?retryWrites=true&w=majority"
+
+# MINER JOB
+# EXPERIENCE FOR ORE MINING
+COAL_EXP: 10
+REDSTONE_EXP: 10
+IRON_EXP: 20
+LAPIS_EXP: 20
+GOLD_EXP: 40
+EMERALD_EXP: 40
+DIAMOND_EXP: 150
+# WOODCUTTER JOB
+#EXPERIENCE FOR CUTTING WOOD
+LOG: 20
+WOOD: 5
+#FARMER JOB
+#EXPERIENCE FOR HARVESTING
+CROPS: 10 #ПШЕНИЦА
+SUGAR_CANE_BLOCK: 10 #ТРОСТНИК
+POTATO: 10 #КАРТОФЕЛЬ
+CARROT: 10 #МОРКОВЬ
+PUMPKIN: 20 #ТЫКВА
+MELON_BLOCK: 20 #АРБУЗ
