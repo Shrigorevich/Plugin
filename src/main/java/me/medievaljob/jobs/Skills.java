@@ -6,49 +6,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Skills {
-    private Miner miner;
-    private Woodcutter woodcutter;
-    private Farmer farmer;
-    private Breeder breeder;
-    private Hunter hunter;
+    private List<Job> skills;
     double expBoost;
 
-    public Skills(Miner miner, Woodcutter woodcutter, Farmer farmer, Breeder breeder, Hunter hunter, Double expBoost) {
-        this.breeder = breeder;
-        this.farmer = farmer;
-        this.miner = miner;
-        this.hunter = hunter;
-        this.woodcutter = woodcutter;
+    public Skills(List<Job> skills, Double expBoost) {
+        this.skills = skills;
         this.expBoost = expBoost;
     }
 
     public Skills() {
-        this.breeder = new Breeder("breeder");
-        this.farmer = new Farmer("farmer");
-        this.miner = new Miner("miner");
-        this.hunter = new Hunter("hunter");
-        this.woodcutter = new Woodcutter("woodcutter");
+        String[] jobTitles = {"miner", "woodcutter", "farmer", "breeder", "hunter"};
+        List<Job> skills = new ArrayList<>();
+        skills.add(new Miner(jobTitles[0]));
+        skills.add(new Woodcutter(jobTitles[1]));
+        skills.add(new Farmer(jobTitles[2]));
+        skills.add(new Breeder(jobTitles[3]));
+        skills.add(new Hunter(jobTitles[4]));
+//        for(String jobTitle : jobTitles){
+//            skills.add(new Job(jobTitle));
+//        }
+        this.skills = skills;
         this.expBoost = 1.0;
     }
 
-    public Breeder getBreeder() {
-        return breeder;
+    public Job getOne(String name){
+        for (Job job : this.skills){
+            if (job.getName().equals(name)){
+                return  job;
+            }
+        }
+        return null;
     }
 
-    public Farmer getFarmer() {
-        return farmer;
-    }
-
-    public Hunter getHunter() {
-        return hunter;
-    }
-
-    public Miner getMiner() {
-        return miner;
-    }
-
-    public Woodcutter getWoodcutter() {
-        return woodcutter;
+    public List<Job> getAll() {
+        return skills;
     }
 
     public Double getExpBoost() {
@@ -57,7 +48,7 @@ public class Skills {
 
     public void setExpBoost() {
 
-        Integer activeSkillsNumber = getActiveSkills().size();
+        int activeSkillsNumber = getActiveSkills().size();
 
         if (activeSkillsNumber == 0) {
             this.expBoost = 1.0;
@@ -68,14 +59,12 @@ public class Skills {
     }
 
     public List<Job> getActiveSkills() {
-        List<Job> activeJobs = new ArrayList<>(5);
-
-        if (miner.getActive()) activeJobs.add(miner);
-        if (woodcutter.getActive()) activeJobs.add(woodcutter);
-        if (farmer.getActive()) activeJobs.add(farmer);
-        if (breeder.getActive()) activeJobs.add(breeder);
-        if (hunter.getActive()) activeJobs.add(hunter);
-
+        List<Job> activeJobs = new ArrayList<>();
+        for (Job job : this.skills){
+            if (job.getActive()){
+                activeJobs.add(job);
+            }
+        }
         return activeJobs;
     }
 

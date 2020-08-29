@@ -40,31 +40,31 @@ public class Jobs implements CommandExecutor {
                         if (args.length > 1) {
                             switch (args[1]) {
                                 case "miner":
-                                    user.getSkills().getMiner().setActive(true);
+                                    user.getSkills().getOne("miner").setActive(true);
                                     user.getSkills().setExpBoost();
                                     player.sendMessage(ChatColor.AQUA + "Congratulations, you've become a miner !");
                                     mongoDB.updateUser(user);
                                     break;
                                 case "woodcutter":
-                                    user.getSkills().getWoodcutter().setActive(true);
+                                    user.getSkills().getOne("woodcutter").setActive(true);
                                     user.getSkills().setExpBoost();
                                     player.sendMessage(ChatColor.AQUA + "Congratulations, you've become a woodcutter !");
                                     mongoDB.updateUser(user);
                                     break;
                                 case "farmer":
-                                    user.getSkills().getFarmer().setActive(true);
+                                    user.getSkills().getOne("farmer").setActive(true);
                                     user.getSkills().setExpBoost();
                                     player.sendMessage(ChatColor.AQUA + "Congratulations, you've become a farmer !");
                                     mongoDB.updateUser(user);
                                     break;
                                 case "breeder":
-                                    user.getSkills().getBreeder().setActive(true);
+                                    user.getSkills().getOne("breeder").setActive(true);
                                     user.getSkills().setExpBoost();
                                     player.sendMessage(ChatColor.AQUA + "Congratulations, you've become a breeder !");
                                     mongoDB.updateUser(user);
                                     break;
                                 case "hunter":
-                                    user.getSkills().getHunter().setActive(true);
+                                    user.getSkills().getOne("hunter").setActive(true);
                                     user.getSkills().setExpBoost();
                                     player.sendMessage(ChatColor.AQUA + "Congratulations, you've become a hunter !");
                                     mongoDB.updateUser(user);
@@ -79,31 +79,31 @@ public class Jobs implements CommandExecutor {
                         if (args.length > 1) {
                             switch (args[1]) {
                                 case "miner":
-                                    user.getSkills().getMiner().setActive(false);
+                                    user.getSkills().getOne("miner").setActive(false);
                                     user.getSkills().setExpBoost();
                                     player.sendMessage("You left your job as a" + ChatColor.RED + " miner!");
                                     mongoDB.updateUser(user);
                                     break;
                                 case "woodcutter":
-                                    user.getSkills().getWoodcutter().setActive(false);
+                                    user.getSkills().getOne("woodcutter").setActive(false);
                                     user.getSkills().setExpBoost();
                                     player.sendMessage("You left your job as a" + ChatColor.RED + " woodcutter!");
                                     mongoDB.updateUser(user);
                                     break;
                                 case "farmer":
-                                    user.getSkills().getFarmer().setActive(false);
+                                    user.getSkills().getOne("farmer").setActive(false);
                                     user.getSkills().setExpBoost();
                                     player.sendMessage("You left your job as a" + ChatColor.RED + " farmer!");
                                     mongoDB.updateUser(user);
                                     break;
                                 case "breeder":
-                                    user.getSkills().getBreeder().setActive(false);
+                                    user.getSkills().getOne("breeder").setActive(false);
                                     user.getSkills().setExpBoost();
                                     player.sendMessage("You left your job as a" + ChatColor.RED + " hunter!");
                                     mongoDB.updateUser(user);
                                     break;
                                 case "hunter":
-                                    user.getSkills().getHunter().setActive(false);
+                                    user.getSkills().getOne("hunter").setActive(false);
                                     user.getSkills().setExpBoost();
                                     player.sendMessage("You left your job as a" + ChatColor.RED + " hunter!");
                                     mongoDB.updateUser(user);
@@ -115,6 +115,12 @@ public class Jobs implements CommandExecutor {
                         }
                         break;
                     case "test":
+                        for(Job job : user.getSkills().getActiveSkills()){
+                            System.out.println(job);
+                        }
+                        break;
+                    case "savestate":
+                        mongoDB.saveState(state.getUsers());
                         break;
                     default:
                         player.sendMessage("Non-existent argument: " + args[0]);

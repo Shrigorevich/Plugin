@@ -19,7 +19,6 @@ public class MedievalJob extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         this.getLogger().info("IT IS WORK" );
-        mongoDB.getData();
         state = new State(mongoDB.getData());
         //config
         getConfig().options().copyDefaults();
