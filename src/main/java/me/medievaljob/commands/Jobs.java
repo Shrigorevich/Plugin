@@ -38,79 +38,29 @@ public class Jobs implements CommandExecutor {
                         break;
                     case "join":
                         if (args.length > 1) {
-                            switch (args[1]) {
-                                case "miner":
-                                    user.getSkills().getOne("miner").setActive(true);
-                                    user.getSkills().setExpBoost();
-                                    player.sendMessage(ChatColor.AQUA + "Congratulations, you've become a miner !");
-                                    mongoDB.updateUser(user);
-                                    break;
-                                case "woodcutter":
-                                    user.getSkills().getOne("woodcutter").setActive(true);
-                                    user.getSkills().setExpBoost();
-                                    player.sendMessage(ChatColor.AQUA + "Congratulations, you've become a woodcutter !");
-                                    mongoDB.updateUser(user);
-                                    break;
-                                case "farmer":
-                                    user.getSkills().getOne("farmer").setActive(true);
-                                    user.getSkills().setExpBoost();
-                                    player.sendMessage(ChatColor.AQUA + "Congratulations, you've become a farmer !");
-                                    mongoDB.updateUser(user);
-                                    break;
-                                case "breeder":
-                                    user.getSkills().getOne("breeder").setActive(true);
-                                    user.getSkills().setExpBoost();
-                                    player.sendMessage(ChatColor.AQUA + "Congratulations, you've become a breeder !");
-                                    mongoDB.updateUser(user);
-                                    break;
-                                case "hunter":
-                                    user.getSkills().getOne("hunter").setActive(true);
-                                    user.getSkills().setExpBoost();
-                                    player.sendMessage(ChatColor.AQUA + "Congratulations, you've become a hunter !");
-                                    mongoDB.updateUser(user);
-                                    break;
-                                default:
-                                    player.sendMessage("There is no such job");
-                                    break;
+                            Job job = user.getSkills().getOne(args[1]);
+                            if(job instanceof Job){
+                                job.setActive(true);
+                                user.getSkills().setExpBoost();
+                                player.sendMessage(ChatColor.AQUA + "Congratulations, you've become a " + job.getName() + "!");
+                                // ну тут в форматированную строку переделать
+                                mongoDB.updateUser(user);
+                            }else{
+                                player.sendMessage(ChatColor.RED + "Такой работы у нас нет! " + args[1]);
                             }
                         }
                         break;
                     case "leave":
                         if (args.length > 1) {
-                            switch (args[1]) {
-                                case "miner":
-                                    user.getSkills().getOne("miner").setActive(false);
-                                    user.getSkills().setExpBoost();
-                                    player.sendMessage("You left your job as a" + ChatColor.RED + " miner!");
-                                    mongoDB.updateUser(user);
-                                    break;
-                                case "woodcutter":
-                                    user.getSkills().getOne("woodcutter").setActive(false);
-                                    user.getSkills().setExpBoost();
-                                    player.sendMessage("You left your job as a" + ChatColor.RED + " woodcutter!");
-                                    mongoDB.updateUser(user);
-                                    break;
-                                case "farmer":
-                                    user.getSkills().getOne("farmer").setActive(false);
-                                    user.getSkills().setExpBoost();
-                                    player.sendMessage("You left your job as a" + ChatColor.RED + " farmer!");
-                                    mongoDB.updateUser(user);
-                                    break;
-                                case "breeder":
-                                    user.getSkills().getOne("breeder").setActive(false);
-                                    user.getSkills().setExpBoost();
-                                    player.sendMessage("You left your job as a" + ChatColor.RED + " hunter!");
-                                    mongoDB.updateUser(user);
-                                    break;
-                                case "hunter":
-                                    user.getSkills().getOne("hunter").setActive(false);
-                                    user.getSkills().setExpBoost();
-                                    player.sendMessage("You left your job as a" + ChatColor.RED + " hunter!");
-                                    mongoDB.updateUser(user);
-                                    break;
-                                default:
-                                    player.sendMessage("There is no such job");
-                                    break;
+                            Job job = user.getSkills().getOne(args[1]);
+                            if(job instanceof Job){
+                                job.setActive(false);
+                                user.getSkills().setExpBoost();
+                                player.sendMessage(ChatColor.AQUA + "You left your job as a" + ChatColor.RED + job.getName());
+                                // ну тут в форматированную строку переделать
+                                mongoDB.updateUser(user);
+                            }else{
+                                player.sendMessage(ChatColor.RED + "Такой работы у нас нет! " + args[1]);
                             }
                         }
                         break;

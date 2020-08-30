@@ -41,14 +41,19 @@ public class MongoDB {
                 switch (document1.getString("name")) {
                     case "miner":
                         jobs.add(new Miner(name, level, progress, active));
+                        break;
                     case "woodcutter":
                         jobs.add(new Woodcutter(name, level, progress, active));
+                        break;
                     case "farmer":
                         jobs.add(new Farmer(name, level, progress, active));
+                        break;
                     case "breeder":
                         jobs.add(new Breeder(name, level, progress, active));
+                        break;
                     case "hunter":
                         jobs.add(new Hunter(name, level, progress, active ));
+                        break;
                     default:
                         break;
                 }

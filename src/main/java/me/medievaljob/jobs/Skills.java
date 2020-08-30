@@ -12,6 +12,7 @@ public class Skills {
     public Skills(List<Job> skills, Double expBoost) {
         this.skills = skills;
         this.expBoost = expBoost;
+        System.out.println(skills.size() + "Skills size in constructor");
     }
 
     public Skills() {
@@ -42,6 +43,17 @@ public class Skills {
         return skills;
     }
 
+    public List<Job> getActiveSkills() {
+        List<Job> activeJobs = new ArrayList<>();
+        System.out.println(skills.size() + "Skills size");
+        for (Job job : skills){
+            if (job.getActive()){
+                activeJobs.add(job);
+            }
+        }
+        return activeJobs;
+    }
+
     public Double getExpBoost() {
         return expBoost;
     }
@@ -56,16 +68,6 @@ public class Skills {
             this.expBoost = round(1.0 / activeSkillsNumber, 2);
         }
 
-    }
-
-    public List<Job> getActiveSkills() {
-        List<Job> activeJobs = new ArrayList<>();
-        for (Job job : this.skills){
-            if (job.getActive()){
-                activeJobs.add(job);
-            }
-        }
-        return activeJobs;
     }
 
     private static double round(double value, int places) {
