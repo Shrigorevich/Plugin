@@ -3,6 +3,7 @@ package me.medievaljob;
 import com.mongodb.client.MongoDatabase;
 import me.medievaljob.jobs.*;
 import me.medievaljob.state.User;
+import org.bson.conversions.Bson;
 import org.bukkit.ChatColor;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -52,7 +53,7 @@ public class MongoDB {
                         jobs.add(new Breeder(name, level, progress, active));
                         break;
                     case "hunter":
-                        jobs.add(new Hunter(name, level, progress, active ));
+                        jobs.add(new Hunter(name, level, progress, active));
                         break;
                     default:
                         break;
@@ -93,8 +94,27 @@ public class MongoDB {
         col.insertOne(doc);
     }
 
+    //    public void updateUser(User user) {
+//        System.out.println(ChatColor.GREEN + "Saving " + user.getName());
+//        MongoDatabase database = mongoClient.getDatabase("jeroniya");
+//        MongoCollection<Document> col = database.getCollection("users");
+//
+//        Skills skills = user.getSkills();
+//        List<Document> jobDocList = new ArrayList<>();
+//        for (Job job : skills.getAll()) {
+//            jobDocList.add(new Document("name", job.getName())
+//                    .append("level", job.getLevel())
+//                    .append("progress", job.getProgress())
+//                    .append("active", job.getActive()));
+//        }
+//        Document doc = new Document("name", user.getName())
+//                .append("skills", new Document("jobList", jobDocList)
+//                        .append("expBoost", skills.getExpBoost()));
+//
+//        col.replaceOne(new Document("name", user.getName()), doc);
+//    }
     public void updateUser(User user) {
-        System.out.println(ChatColor.GREEN + "Saving " + user.getName());
+        System.out.println(ChatColor.GREEN + "Updating " + user.getName());
         MongoDatabase database = mongoClient.getDatabase("jeroniya");
         MongoCollection<Document> col = database.getCollection("users");
 
@@ -110,6 +130,11 @@ public class MongoDB {
                 .append("skills", new Document("jobList", jobDocList)
                         .append("expBoost", skills.getExpBoost()));
 
-        col.replaceOne(new Document("name", user.getName()), doc);
+        Bson newData = new Document("skills",
+                new Document("jobList", jobDocList).append("expBoost", skills.getExpBoost()));
+
+        col.findOneAndUpdate(new Document("name", user.getName()), new Document("$set", newData));
+
     }
+
 }

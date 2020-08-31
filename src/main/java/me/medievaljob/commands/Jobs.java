@@ -70,7 +70,7 @@ public class Jobs implements CommandExecutor {
                         }
                         break;
                     case "savestate":
-                        mongoDB.saveState(state.getUsers());
+                        mongoDB.updateUser(state.getUser("Kek"));
                         break;
                     default:
                         player.sendMessage("Non-existent argument: " + args[0]);

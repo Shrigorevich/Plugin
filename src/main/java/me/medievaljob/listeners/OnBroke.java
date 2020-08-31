@@ -1,5 +1,4 @@
 package me.medievaljob.listeners;
-
 import me.medievaljob.MongoDB;
 import me.medievaljob.jobs.Job;
 import me.medievaljob.state.State;
@@ -28,31 +27,36 @@ public class OnBroke implements Listener {
     @EventHandler
     public void onBroke(BlockBreakEvent event) {
 
-        Player player = event.getPlayer();
-        User user = state.getUser(player.getName());
-        Material block = event.getBlock().getType();
-        String blockName = block.name();
-        event.setDropItems(false);
-        //System.out.println(event.getBlock().getType().hashCode());
-        player.sendMessage(ChatColor.GREEN + blockName);
+        if (!event.getBlock().hasMetadata("notNaturally")){
 
-        if(BlockType.isRockBlock(block)){
-            Job miner = user.getSkills().getOne("miner");
-            if(miner.getActive()){
-                miner.updateProgress(config.getInt(blockName + "_EXP"), user.getSkills().getExpBoost());
+            Player player = event.getPlayer();
+            User user = state.getUser(player.getName());
+
+            Material block = event.getBlock().getType();
+            String blockName = block.name();
+            player.sendMessage(ChatColor.GREEN + blockName);
+
+            event.setDropItems(true);
+
+
+            if(BlockType.isRockBlock(block)){
+                Job miner = user.getSkills().getOne("miner");
+                if(miner.getActive()){
+                    miner.updateProgress(config.getInt(blockName + "_EXP"), user.getSkills().getExpBoost());
+                }
+            }else if(BlockType.isPlantBlock(block)){
+                Job farmer = user.getSkills().getOne("farmer");
+                if(farmer.getActive()){
+                    farmer.updateProgress(config.getInt(blockName + "_EXP"), user.getSkills().getExpBoost());
+                }
+            }else if (BlockType.isWoodBlock(block)){
+                Job woodcutter = user.getSkills().getOne("woodcutter");
+                if(woodcutter.getActive()){
+                    woodcutter.updateProgress(config.getInt(blockName + "_EXP"), user.getSkills().getExpBoost());
+                }
+            }else{
+                return;
             }
-        }else if(BlockType.isPlantBlock(block)){
-            Job farmer = user.getSkills().getOne("farmer");
-            if(farmer.getActive()){
-                farmer.updateProgress(config.getInt(blockName + "_EXP"), user.getSkills().getExpBoost());
-            }
-        }else if (BlockType.isWoodBlock(block)){
-            Job woodcutter = user.getSkills().getOne("woodcutter");
-            if(woodcutter.getActive()){
-                woodcutter.updateProgress(config.getInt(blockName + "_EXP"), user.getSkills().getExpBoost());
-            }
-        }else{
-            return;
         }
     }
 }

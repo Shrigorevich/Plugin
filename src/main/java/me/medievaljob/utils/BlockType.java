@@ -7,13 +7,13 @@ public class BlockType {
     public static boolean isRockBlock(Material block){
         switch (block){
             case COAL_ORE:
-                return true;
             case IRON_ORE:
             case REDSTONE_ORE:
             case LAPIS_ORE:
             case GOLD_ORE:
             case EMERALD_ORE:
             case DIAMOND_ORE:
+                return true;
             default:
                 return false;
         }
