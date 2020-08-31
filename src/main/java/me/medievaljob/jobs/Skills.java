@@ -12,7 +12,6 @@ public class Skills {
     public Skills(List<Job> skills, Double expBoost) {
         this.skills = skills;
         this.expBoost = expBoost;
-        System.out.println(skills.size() + "Skills size in constructor");
     }
 
     public Skills() {

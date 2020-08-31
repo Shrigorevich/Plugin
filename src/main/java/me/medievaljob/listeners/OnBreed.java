@@ -3,7 +3,8 @@ package me.medievaljob.listeners;
 import me.medievaljob.jobs.Job;
 import me.medievaljob.state.State;
 import me.medievaljob.state.User;
-import org.bukkit.configuration.file.FileConfiguration;
+import me.medievaljob.utils.Config;
+
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,10 +12,8 @@ import org.bukkit.event.entity.EntityBreedEvent;
 
 public class OnBreed implements Listener {
     private State state;
-    private FileConfiguration config;
-    public OnBreed(State state, FileConfiguration config){
+    public OnBreed(State state){
         this.state = state;
-        this.config = config;
     }
 
     @EventHandler
@@ -24,10 +23,8 @@ public class OnBreed implements Listener {
         String breederName = event.getBreeder().getName();
         User user = state.getUser(breederName);
         Job job = user.getSkills().getOne("breeder");
-        System.out.println(entityType + " " + entityType.toString() + "_BREEDING_EXP");
         if(job.getActive()){
-            System.out.println("Go exp");
-            job.updateProgress(config.getInt(entityType.toString() + "_BREEDING_EXP"), user.getSkills().getExpBoost());
+            job.updateProgress(Config.getInt(entityType.toString() + "_BREEDING_EXP"), user.getSkills().getExpBoost());
         }
     }
 }

@@ -94,25 +94,6 @@ public class MongoDB {
         col.insertOne(doc);
     }
 
-    //    public void updateUser(User user) {
-//        System.out.println(ChatColor.GREEN + "Saving " + user.getName());
-//        MongoDatabase database = mongoClient.getDatabase("jeroniya");
-//        MongoCollection<Document> col = database.getCollection("users");
-//
-//        Skills skills = user.getSkills();
-//        List<Document> jobDocList = new ArrayList<>();
-//        for (Job job : skills.getAll()) {
-//            jobDocList.add(new Document("name", job.getName())
-//                    .append("level", job.getLevel())
-//                    .append("progress", job.getProgress())
-//                    .append("active", job.getActive()));
-//        }
-//        Document doc = new Document("name", user.getName())
-//                .append("skills", new Document("jobList", jobDocList)
-//                        .append("expBoost", skills.getExpBoost()));
-//
-//        col.replaceOne(new Document("name", user.getName()), doc);
-//    }
     public void updateUser(User user) {
         System.out.println(ChatColor.GREEN + "Updating " + user.getName());
         MongoDatabase database = mongoClient.getDatabase("jeroniya");

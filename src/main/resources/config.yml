@@ -2,8 +2,10 @@
 MongoURI: "mongodb+srv://shrigorevich:456385@cluster0.kjaby.azure.mongodb.net/jeroniya?retryWrites=true&w=majority"
 
 
-# Множитель суммы опыта, необходимого для повышения уровня
+# Множитель опыта, необходимого для повышения уровня
 EXP_TO_LVL_UP_CF: 1.5
+# ПОСТОЯННАЯ ОПЫТА: кол-во опыта, необходимого для первого повышения
+EXP_CONST: 300
 
 # MINER JOB
 # EXPERIENCE FOR ORE MINING

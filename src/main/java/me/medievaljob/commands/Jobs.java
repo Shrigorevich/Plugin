@@ -56,7 +56,7 @@ public class Jobs implements CommandExecutor {
                             if(job instanceof Job){
                                 job.setActive(false);
                                 user.getSkills().setExpBoost();
-                                player.sendMessage(ChatColor.AQUA + "You left your job as a" + ChatColor.RED + job.getName());
+                                player.sendMessage(ChatColor.AQUA + "You left your job as a " + ChatColor.RED + job.getName());
                                 // ну тут в форматированную строку переделать
                                 mongoDB.updateUser(user);
                             }else{
@@ -70,7 +70,7 @@ public class Jobs implements CommandExecutor {
                         }
                         break;
                     case "savestate":
-                        mongoDB.updateUser(state.getUser("Kek"));
+                        mongoDB.saveState(state.getUsers());
                         break;
                     default:
                         player.sendMessage("Non-existent argument: " + args[0]);

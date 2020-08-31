@@ -31,7 +31,7 @@ public class MedievalJob extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new OnBroke(state, mongoDB, config), this);
         getServer().getPluginManager().registerEvents(new OnBlockPlace(), this);
         getServer().getPluginManager().registerEvents(new OnShearSheep(state, config), this);
-        getServer().getPluginManager().registerEvents(new OnBreed(state, config), this);
+        getServer().getPluginManager().registerEvents(new OnBreed(state), this);
 
         //commands
         getCommand("setconfig").setExecutor(new SetConfig());
