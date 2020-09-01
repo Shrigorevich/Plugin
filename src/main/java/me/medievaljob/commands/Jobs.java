@@ -30,7 +30,7 @@ public class Jobs implements CommandExecutor {
 
                     case "status":
                         String message = "";
-                        for(Job job : user.getSkills().getActiveSkills()){
+                        for(Job job : user.getActiveSkills()){
                             message+= job.getName() + ": " + ChatColor.AQUA + job.getLevel() + " level, " +
                                     ChatColor.GREEN + job.getProgress() + " exp\n" + ChatColor.WHITE;
                         }
@@ -38,10 +38,10 @@ public class Jobs implements CommandExecutor {
                         break;
                     case "join":
                         if (args.length > 1) {
-                            Job job = user.getSkills().getOne(args[1]);
+                            Job job = user.getOne(args[1]);
                             if(job instanceof Job){
                                 job.setActive(true);
-                                user.getSkills().setExpBoost();
+                                user.setExpBoost();
                                 player.sendMessage(ChatColor.AQUA + "Congratulations, you've become a " + job.getName() + "!");
                                 // ну тут в форматированную строку переделать
                                 mongoDB.updateUser(user);
@@ -52,10 +52,10 @@ public class Jobs implements CommandExecutor {
                         break;
                     case "leave":
                         if (args.length > 1) {
-                            Job job = user.getSkills().getOne(args[1]);
+                            Job job = user.getOne(args[1]);
                             if(job instanceof Job){
                                 job.setActive(false);
-                                user.getSkills().setExpBoost();
+                                user.setExpBoost();
                                 player.sendMessage(ChatColor.AQUA + "You left your job as a " + ChatColor.RED + job.getName());
                                 // ну тут в форматированную строку переделать
                                 mongoDB.updateUser(user);
@@ -65,7 +65,7 @@ public class Jobs implements CommandExecutor {
                         }
                         break;
                     case "test":
-                        for(Job job : user.getSkills().getActiveSkills()){
+                        for(Job job : user.getActiveSkills()){
                             System.out.println(job);
                         }
                         break;

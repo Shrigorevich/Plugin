@@ -51,6 +51,7 @@ public class Job {
     }
 
     public void updateProgress(int exp, double expBoost) {
+        System.out.println("new exp " + exp);
         this.progress += (int) exp * expBoost;
         if (this.progress >= this.level *
                 Config.getInt("EXP_CONST") *

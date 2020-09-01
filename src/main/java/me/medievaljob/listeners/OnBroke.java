@@ -6,7 +6,6 @@ import me.medievaljob.state.User;
 import me.medievaljob.utils.BlockType;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -40,19 +39,19 @@ public class OnBroke implements Listener {
 
 
             if(BlockType.isRockBlock(block)){
-                Job miner = user.getSkills().getOne("miner");
+                Job miner = user.getOne("miner");
                 if(miner.getActive()){
-                    miner.updateProgress(config.getInt(blockName + "_EXP"), user.getSkills().getExpBoost());
+                    miner.updateProgress(config.getInt(blockName + "_EXP"), user.getExpBoost());
                 }
             }else if(BlockType.isPlantBlock(block)){
-                Job farmer = user.getSkills().getOne("farmer");
+                Job farmer = user.getOne("farmer");
                 if(farmer.getActive()){
-                    farmer.updateProgress(config.getInt(blockName + "_EXP"), user.getSkills().getExpBoost());
+                    farmer.updateProgress(config.getInt(blockName + "_EXP"), user.getExpBoost());
                 }
             }else if (BlockType.isWoodBlock(block)){
-                Job woodcutter = user.getSkills().getOne("woodcutter");
+                Job woodcutter = user.getOne("woodcutter");
                 if(woodcutter.getActive()){
-                    woodcutter.updateProgress(config.getInt(blockName + "_EXP"), user.getSkills().getExpBoost());
+                    woodcutter.updateProgress(config.getInt(blockName + "_EXP"), user.getExpBoost());
                 }
             }else{
                 return;

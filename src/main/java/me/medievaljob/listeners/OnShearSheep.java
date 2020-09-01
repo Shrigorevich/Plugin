@@ -24,9 +24,9 @@ public class OnShearSheep implements Listener {
 
         Player player = event.getPlayer();
         User user = state.getUser(player.getName());
-        Job job = user.getSkills().getOne("breeder");
+        Job job = user.getOne("breeder");
         if (job.getActive()){
-            job.updateProgress(config.getInt("SHEAR_EXP"), user.getSkills().getExpBoost());
+            job.updateProgress(config.getInt("SHEAR_EXP"), user.getExpBoost());
         }
 
         player.sendMessage("You sheared the sheep");

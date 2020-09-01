@@ -22,9 +22,9 @@ public class OnBreed implements Listener {
         EntityType entityType = event.getEntityType();
         String breederName = event.getBreeder().getName();
         User user = state.getUser(breederName);
-        Job job = user.getSkills().getOne("breeder");
+        Job job = user.getOne("breeder");
         if(job.getActive()){
-            job.updateProgress(Config.getInt(entityType.toString() + "_BREEDING_EXP"), user.getSkills().getExpBoost());
+            job.updateProgress(Config.getInt(entityType.toString() + "_BREEDING_EXP"), user.getExpBoost());
         }
     }
 }

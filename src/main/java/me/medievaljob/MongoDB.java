@@ -59,7 +59,7 @@ public class MongoDB {
                         break;
                 }
             });
-            users.add(new User(document.getString("name"), new Skills(jobs, skills.getDouble("expBoost"))));
+            users.add(new User(document.getString("name"), jobs, skills.getDouble("expBoost")));
         });
 
         return users;
@@ -67,8 +67,6 @@ public class MongoDB {
 
     public void saveState(List<User> users) {
         System.out.println(ChatColor.AQUA + "SAVING DATA...");
-//        MongoDatabase database = mongoClient.getDatabase("jeroniya");
-//        MongoCollection<Document> col = database.getCollection("users");
 
         for (User user : users) {
             updateUser(user);
@@ -80,9 +78,8 @@ public class MongoDB {
         MongoDatabase database = mongoClient.getDatabase("jeroniya");
         MongoCollection<Document> col = database.getCollection("users");
 
-        Skills skills = user.getSkills();
         List<Document> jobDocList = new ArrayList<>();
-        for (Job job : skills.getAll()) {
+        for (Job job : user.getAll()) {
             jobDocList.add(new Document("name", job.getName())
                     .append("level", job.getLevel())
                     .append("progress", job.getProgress())
@@ -90,7 +87,7 @@ public class MongoDB {
         }
         Document doc = new Document("name", user.getName())
                 .append("skills", new Document("jobList", jobDocList)
-                        .append("expBoost", skills.getExpBoost()));
+                        .append("expBoost", user.getExpBoost()));
         col.insertOne(doc);
     }
 
@@ -99,9 +96,8 @@ public class MongoDB {
         MongoDatabase database = mongoClient.getDatabase("jeroniya");
         MongoCollection<Document> col = database.getCollection("users");
 
-        Skills skills = user.getSkills();
         List<Document> jobDocList = new ArrayList<>();
-        for (Job job : skills.getAll()) {
+        for (Job job : user.getAll()) {
             jobDocList.add(new Document("name", job.getName())
                     .append("level", job.getLevel())
                     .append("progress", job.getProgress())
@@ -109,10 +105,10 @@ public class MongoDB {
         }
         Document doc = new Document("name", user.getName())
                 .append("skills", new Document("jobList", jobDocList)
-                        .append("expBoost", skills.getExpBoost()));
+                        .append("expBoost", user.getExpBoost()));
 
         Bson newData = new Document("skills",
-                new Document("jobList", jobDocList).append("expBoost", skills.getExpBoost()));
+                new Document("jobList", jobDocList).append("expBoost", user.getExpBoost()));
 
         col.findOneAndUpdate(new Document("name", user.getName()), new Document("$set", newData));
 

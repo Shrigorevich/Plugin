@@ -32,16 +32,16 @@ public class OnEntityDeath implements Listener {
             User user = state.getUser(player.getName());
 
             if (KilledEntityType.isPeacefulEntity(entityType)) {
-                Job breeder = user.getSkills().getOne("breeder");
+                Job breeder = user.getOne("breeder");
                 if (breeder.getActive()) {
-                    breeder.updateProgress(config.getInt(entityType + "_EXP"), user.getSkills().getExpBoost());
+                    breeder.updateProgress(config.getInt(entityType + "_EXP"), user.getExpBoost());
                 }
             }
 
             if (KilledEntityType.isHostileEntity(entityType)) {
-                Job hunter = user.getSkills().getOne("hunter");
+                Job hunter = user.getOne("hunter");
                 if (hunter.getActive()) {
-                    hunter.updateProgress(config.getInt(entityType + "_EXP"), user.getSkills().getExpBoost());
+                    hunter.updateProgress(config.getInt(entityType + "_EXP"), user.getExpBoost());
                 }
             }
         }
