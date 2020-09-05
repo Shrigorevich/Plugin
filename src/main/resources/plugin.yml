@@ -11,3 +11,6 @@ commands:
   jobs:
     description: Jobs management
     usage: /jobs status, /jobs join <jobName>
+  config:
+    description: Config settings
+    usage: /config set <key> <value>, /config getint (getstring) <key>

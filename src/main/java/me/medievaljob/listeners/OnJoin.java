@@ -22,8 +22,6 @@ public class OnJoin implements Listener {
     public void onJoin(PlayerJoinEvent event) {
     	Player player = event.getPlayer();
 
-    	//this.getLogger().info(player.getAddress() + player.getName());
-
 		User user = state.getUser(player.getName());
     	if (user instanceof User){
 		}else{

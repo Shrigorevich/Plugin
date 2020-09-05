@@ -43,7 +43,6 @@ public class Jobs implements CommandExecutor {
                                 job.setActive(true);
                                 user.setExpBoost();
                                 player.sendMessage(ChatColor.AQUA + "Congratulations, you've become a " + job.getName() + "!");
-                                // ну тут в форматированную строку переделать
                                 mongoDB.updateUser(user);
                             }else{
                                 player.sendMessage(ChatColor.RED + "Такой работы у нас нет! " + args[1]);
@@ -56,22 +55,24 @@ public class Jobs implements CommandExecutor {
                             if(job instanceof Job){
                                 job.setActive(false);
                                 user.setExpBoost();
-                                player.sendMessage(ChatColor.AQUA + "You left your job as a " + ChatColor.RED + job.getName());
-                                // ну тут в форматированную строку переделать
+                                player.sendMessage(String.format(ChatColor.AQUA + "You left your job as a " + ChatColor.RED + job.getName()));
                                 mongoDB.updateUser(user);
                             }else{
                                 player.sendMessage(ChatColor.RED + "Такой работы у нас нет! " + args[1]);
                             }
                         }
                         break;
-                    case "test":
-                        for(Job job : user.getActiveSkills()){
-                            System.out.println(job);
-                        }
+                    case "setlvl":
+                        user.getOne(args[1]).setLevel(Integer.parseInt(args[2]));
                         break;
                     case "savestate":
                         mongoDB.saveState(state.getUsers());
                         break;
+                    case "sethp":
+                        player.setHealth(Integer.parseInt(args[1]));
+                        break;
+                    case "setmaxhp":
+                        player.setHealthScale(Integer.parseInt(args[1]));
                     default:
                         player.sendMessage("Non-existent argument: " + args[0]);
                 }

@@ -1,8 +1,11 @@
 package me.medievaljob.jobs;
-
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Miner extends Job {
     public Miner(String name) {
@@ -13,7 +16,4 @@ public class Miner extends Job {
         super(name, level, progress, active);
     }
 
-    public void dropCoal(Block block){
-        block.getWorld().dropItem(block.getLocation(), new ItemStack(Material.COAL, 2));
-    }
 }

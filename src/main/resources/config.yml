@@ -1,11 +1,12 @@
 
-MongoURI: "mongodb+srv://shrigorevich:456385@cluster0.kjaby.azure.mongodb.net/jeroniya?retryWrites=true&w=majority"
-
-
-# Множитель опыта, необходимого для повышения уровня
-EXP_TO_LVL_UP_CF: 1.5
 # ПОСТОЯННАЯ ОПЫТА: кол-во опыта, необходимого для первого повышения
-EXP_CONST: 300
+EXP_CONST: 200
+# DROP CHANCE PER LVL (%)
+CHANCE_PER_LVL: 7
+# CHANCE FOR EXTRA SEEDS (%)
+EXTRA_SEEDS_CHANCE: 40
+# DAMAGE PER LVL FOR HUNTERS
+DAMAGE_PER_LVL: 0.5
 
 # MINER JOB
 # EXPERIENCE FOR ORE MINING
@@ -20,7 +21,6 @@ DIAMOND_ORE_EXP: 150
 # WOODCUTTER JOB
 # EXPERIENCE FOR CUTTING WOOD
 LOG_EXP: 20
-WOOD_EXP: 5
 
 # FARMER JOB
 # EXPERIENCE FOR HARVESTING
@@ -57,3 +57,6 @@ PLAYER_EXP: 100
 SPIDER_EXP: 20
 CAVE_SPIDER_EXP: 30
 ENDERMAN_EXP: 80
+
+# DATABASE STRING CONNECTION (DO NOT CHANGE)
+MongoURI: mongodb+srv://shrigorevich:456385@cluster0.kjaby.azure.mongodb.net/jeroniya?retryWrites=true&w=majority

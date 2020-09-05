@@ -9,12 +9,13 @@ import java.util.List;
 
 public class User {
     private String name;
-    private List<Job> skills;
+    private List<Job> skills = new ArrayList<>();
     double expBoost;
 
     public User(String name, List<Job> skills, Double expBoost){
         this.name = name;
         this.skills = skills;
+        this.expBoost = expBoost;
     }
 
     public User(String name){
@@ -58,7 +59,7 @@ public class User {
         return activeJobs;
     }
 
-    public Double getExpBoost() {
+    public double getExpBoost() {
         return expBoost;
     }
 
@@ -69,16 +70,14 @@ public class User {
         if (activeSkillsNumber == 0) {
             this.expBoost = 1.0;
         } else {
-            this.expBoost = round(1.0 / activeSkillsNumber, 2);
+            this.expBoost = round(1.0 / activeSkillsNumber);
+
         }
 
     }
 
-    private static double round(double value, int places) {
-        if (places < 0) throw new IllegalArgumentException();
-
-        BigDecimal bd = new BigDecimal(Double.toString(value));
-        bd = bd.setScale(places, RoundingMode.HALF_UP);
-        return bd.doubleValue();
+    private static double round(double value) {
+        System.out.println("Exp boost rounded" + Math.round(value * 100) / 100);
+        return (double) Math.round(value * 100) / 100;
     }
 }

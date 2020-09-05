@@ -2,12 +2,19 @@ package me.medievaljob;
 
 import me.medievaljob.listeners.*;
 import me.medievaljob.state.State;
+import me.medievaljob.utils.Config;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.event.Listener;
 
 import me.medievaljob.commands.Jobs;
 import me.medievaljob.commands.SetConfig;
+
+//TODO: add job boosts for Hunter
+//TODO: set drop for OnShear event
+//TODO: PlayerItemDamageEvent
+
 
 
 public class MedievalJob extends JavaPlugin implements Listener {
@@ -17,27 +24,27 @@ public class MedievalJob extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        this.getLogger().info("IT IS WORK" );
+        this.getLogger().info(ChatColor.AQUA + "IT IS WORK" );
         state = new State(mongoDB.getData());
-        FileConfiguration config = getConfig();
         //config
         getConfig().options().copyDefaults();
         saveDefaultConfig();
+        FileConfiguration config = getConfig();
 
         //events
-        //PlayerItemDamageEvent
         getServer().getPluginManager().registerEvents(new OnJoin(state, mongoDB), this);
         getServer().getPluginManager().registerEvents(new OnEntityDeath(state, mongoDB, config), this);
         getServer().getPluginManager().registerEvents(new OnBroke(state, mongoDB, config), this);
         getServer().getPluginManager().registerEvents(new OnBlockPlace(), this);
         getServer().getPluginManager().registerEvents(new OnShearSheep(state, config), this);
         getServer().getPluginManager().registerEvents(new OnBreed(state), this);
+        getServer().getPluginManager().registerEvents(new OnDamage(state), this);
 
         //commands
-        getCommand("setconfig").setExecutor(new SetConfig());
+        //getCommand("config").setExecutor(new SetConfig());
         getCommand("jobs").setExecutor(new Jobs(state, mongoDB));
 
-        System.out.println("Connection to the database");
+        System.out.println(ChatColor.AQUA + "Connection to the database");
     }
 
     @Override
